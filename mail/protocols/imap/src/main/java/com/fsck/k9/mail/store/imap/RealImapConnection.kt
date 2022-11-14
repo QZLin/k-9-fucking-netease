@@ -95,6 +95,8 @@ internal class RealImapConnection(
             authSuccess = true
 
             extractOrRequestCapabilities(responses)
+            if (hasCapability("ID")) // Patch for 163
+                executeSimpleCommand("""ID ("name" "k-9" "version" "6.000")""")
 
             enableCompressionIfRequested()
             sendClientIdIfSupported()
